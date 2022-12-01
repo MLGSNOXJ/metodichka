@@ -16,4 +16,20 @@ int main() {
 }
 
 
+#include #include
 
+using namespace std;
+
+int main() { 
+int f = 1; 
+int n=1,x; 
+double s = 0; 
+cin >> n >> x; 
+for(int i = 1; i <=n; i++){ 
+s+= f*pow(x,2*n+1);
+f*=(f+ 1); 
+}
+
+cout << s << endl;
+return 0;
+}
