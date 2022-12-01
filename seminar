@@ -1,0 +1,19 @@
+#include <iostream>
+
+using namespace std;
+
+int main() { 
+    double b1 = 1, b2 = 2,n, b=0; 
+    cin >> n; 
+    for(int i = 3; i <= n; i++){ 
+        b = (b2 - 1)/(b1+ 1);
+        b1 = b2;
+        b2 = b;
+        
+        } 
+        cout << b; 
+    
+}
+
+
+
