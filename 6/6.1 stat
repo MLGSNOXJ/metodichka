@@ -1,0 +1,55 @@
+#include <iostream> //одномерный
+
+using namespace std;
+
+int main()
+{
+    int a[10];
+    int n;
+    cin >> n;
+    for(int i = 0; i < n; ++i){
+        cin >> a[i];
+        if (a[i] > 0)
+            a[i] = -a[i];
+        else if (a[i] < 0)
+            a[i] = -1 * a[i];
+        else if (a[i] = 0)
+            a[i] = 0;
+    }
+    for(int i = 0; i < n; ++i){
+        cout << a[i] << " ";
+    }
+    return 0;
+}
+
+
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[10][10];
+    int n,m;
+    cin >> n >> m;
+    for(int i = 0; i < n; ++i){
+        for(int j = 0; j < m; ++j){
+        cin >> a[i][j];
+        if (a[i][j] > 0)
+            a[i][j] = -a[i][j];
+        else if (a[i][j] < 0)
+            a[i][j] = -1 * a[i][j];
+        else if (a[i][j] = 0)
+            a[i][j] = 0;
+    }
+    }
+    for(int i = 0; i < n; ++i){
+        cout << endl;
+        for(int j = 0; j < m; ++j){
+        cout << a[i][j] << " ";
+    }
+    }
+    return 0;
+}
