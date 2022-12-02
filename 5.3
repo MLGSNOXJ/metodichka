@@ -1,0 +1,20 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int main() { 
+    int i=1; 
+    double s = 0, e, x; 
+    cin >> e;
+    double a = 1 / ((pow((5),i) + pow(4,i + 1)));
+    while(abs(a) >= e){ 
+        s += a;
+        i++;
+        a = 1 / ((pow((5),i) + pow(4,i + 1)));
+        
+        
+    }
+
+cout << s << endl;
+return 0;
+}
