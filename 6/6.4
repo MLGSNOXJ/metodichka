@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+    setlocale(0, "");
+
+    int str;
+    int elem;
+
+    cin >> str; //ввод строк
+    cin >> elem;//ввод элемнтов
+
+    double** arr = new double* [str];//создаём двумерный массив
+    for (int n = 0; n < str; n++)
+        arr[n] = new double[elem];
+    int i; // заполнение строк элементами
+    int j;
+
+    for (i = 0; i < str; ++i)// перебираем строки и элементы и вводим массив
+    {
+        for (j = 0; j < elem; ++j)
+            cin >> arr[i][j];
+    }
+
+    //вводим интервал
+
+    double a;
+    double b;
+
+    cin >> a >> b; // вводим два значения
+
+    if (a < b) // определяем большее из них
+        swap(a, b);// меняем местами
+
+    double s;
+
+    for (i = 0; i < str; ++i)//перебираем количество строк
+    {
+        s = 0; 
+        for (j = 0; j < elem; ++j) // перебираем количество элементов
+        {
+            if (arr[i][j]>a || arr[i][j] < b)
+                s = s + arr[i][j];
+            if (j == elem - 1) // если доходим до последнего эл-та в строке 
+            {
+                cout << s << endl;
+            }
+        }
+    }
+}
