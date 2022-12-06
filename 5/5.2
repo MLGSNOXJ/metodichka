@@ -1,0 +1,24 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+float fact(float n){
+    if(n == 1 || n == 2){
+        return n;
+    }
+    else
+    return n*fact(n-1);
+}
+int main() { 
+    int f = 1; 
+    int n=1,x; 
+    double s = 0; 
+    cin >> n >> x; 
+    for(int i = 1; i <=n; i++){ 
+        s+=(pow((-1),i - 1) * pow(x,2*i))/fact(2*n); 
+        
+    }
+
+cout << s << endl;
+return 0;
+}
