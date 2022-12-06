@@ -1,0 +1,21 @@
+#include <iostream>
+using namespace std;
+int f(int i){
+if(i == 0)
+return 0;
+else
+return f(i / 10) + i%10;
+
+}
+
+
+
+int main(){
+int a, b;
+cin >> a >> b;
+for (int i = a; i <= b; i++){
+    cout << f(i) << " ";
+}
+return 0;
+}
+
