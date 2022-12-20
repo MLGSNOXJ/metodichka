@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+bool f(int x)
+{
+    bool digits[10];
+    for( int i = 0; i < 10; i++) digits[i] = false;
+    while( x != 0 )
+    {
+        int r = x % 10;
+        if( digits[r] ) return false;
+        digits[r] = true;
+        x /= 10;
+    }
+    return true;
+}
+int main()
+{
+    int n, m;
+    cout << "n = ";
+    cin >> n;
+    string s;
+    int* a = new int[n];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    int k = 0;
+    for (int i = 0; i < n; i++){
+        if(!f(a[i]))
+        a[k++] = a[i];
+    }
+    for (int i = 0; i < k; i++){
+       cout << a[i] << "\t";
+    }
+    delete[] a;
+}
