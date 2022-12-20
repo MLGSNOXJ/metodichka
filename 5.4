@@ -1,0 +1,31 @@
+
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+using namespace std;
+double e = 1e-9;
+double f(double x) {
+    int i = 1;
+    double pi;
+    int b;
+    int k = -1;
+    pi = M_PI;
+    double c = -(pi) / 2;
+    b = 1;
+    while (x > e) {
+        c += (1 / (pow(x, i))) * k;
+        b += 2;
+        k *= -1;
+        i += 2;
+    }
+    return c;
+}
+int main()
+{
+
+    double h;
+    cin >> h;
+    for (double i = -3; i <= -2; i += h) {
+        cout << i << " " << f(i) << endl;
+}
+}
