@@ -1,0 +1,21 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	int i = 1;
+	string s;
+	ifstream in("f.txt");
+	ofstream out("g.txt");
+	while (in.peek() != EOF)
+	{
+		getline(in, s);
+		if (i % 2 != 0)
+			out << s << endl;
+		i++;
+	}
+	in.close();
+	out.close();
+}
