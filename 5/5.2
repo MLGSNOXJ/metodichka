@@ -2,23 +2,22 @@
 #include <cmath>
 
 using namespace std;
-float fact(float n){
-    if(n == 1 || n == 2){
-        return n;
-    }
-    else
-    return n*fact(n-1);
-}
 int main() { 
-    int f = 1; 
-    int n=1,x; 
-    double s = 0; 
-    cin >> n >> x; 
-    for(int i = 1; i <=n; i++){ 
-        s+=(pow((-1),i - 1) * pow(x,2*i))/fact(2*n); 
-        
+    double f = 2; 
+    double n,x, m = -1; 
+    cin >> n >> x;
+    double k = x*x;
+    x = x*x;
+    double s = (x)/2;
+    cout << s << endl;
+    for(int i = 4; i <=2*n; i+=2){ 
+        f =  f * i * (i - 1);
+        x = k * x;
+        m *= -1;
+        s+= ((-1* m) * x)/f; 
+        cout << s << endl;
     }
 
-cout << s << endl;
+cout << "s = " << s << endl;
 return 0;
 }
