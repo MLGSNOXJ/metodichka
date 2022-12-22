@@ -1,0 +1,44 @@
+#include<iostream>
+#include<iomanip>
+
+using namespace std;
+
+int main() {
+	int ar[101][101];
+	int arr[101][101];
+	int n, m, a, b, k = 0, count = 0;
+	double sum = 0;
+	cin >> n >> m;
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < m; j++) {
+			cin >> ar[i][j];
+		}
+	}
+	if (n % 2 == 0) {
+		for (int i = 0; i < n-1; i+=2) { //делаем шаг 2 для того чтобы перескакивать строки
+			for (int j = 0; j < m; j++) {
+				arr[i][j] = ar[i][j]; //в новый массив кладем первую строку
+			}
+			for (int j = 0; j < m; j++) {
+				ar[i][j] = ar[i+1][j]; //в первую строку кладем вторую
+			}
+			for (int j = 0; j < m; j++) {
+				ar[i+1][j] = arr[i][j];//во вторую строку кладем первую
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				cout << ar[i][j] << " ";
+			}
+			cout << endl;
+		}
+	}
+	else {
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				cout << ar[i][j] << " ";
+			}
+			cout << endl;
+		}
+	}
+}
