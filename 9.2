@@ -1,0 +1,25 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+int main()
+{
+	int i = 1;
+	char k;
+	char s;
+	cin >> k;
+	ifstream in("f.txt");
+	ofstream out("g.txt");
+	while (in.peek() != EOF)
+	{
+		in.get(s);
+			out << s;
+			if (s == k) {
+				break;
+			}
+		i++;
+	}
+	in.close();
+	out.close();
+}
