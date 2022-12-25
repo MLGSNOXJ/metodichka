@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <cmath>
 using namespace std;
-double e = 1e-9;
+double e = -4;
 double f(double x) {
     int i = 1;
     double pi;
@@ -14,11 +14,12 @@ double f(double x) {
     b = 1;
     while (x > e) {
         c += (1 / (pow(x, i))) * k;
+        return c;
         b += 2;
         k *= -1;
         i += 2;
     }
-    return c;
+    
 }
 int main()
 {
