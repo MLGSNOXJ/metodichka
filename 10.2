@@ -1,0 +1,68 @@
+#include <fstream> 
+#include <iostream> 
+#include <iomanip> 
+using namespace std;
+// открываем глобальные файловые потоки
+ifstream in("f.txt");
+ofstream out("g.txt");
+// описание структуры
+struct point
+{
+	int k, ves;
+	char fio[40], fio1[40], fio2[40];
+	void show(); // член-функция для вывода информации на экран 
+	void print(); // член-функция для вывода информации 8 файл
+};
+void point::show()
+{
+	cout << setw(10) << fio << setw(10) << fio1 << setw(10) << fio2 << setw(8) << k << setw(8) << ves << endl;
+}
+
+void point::print()
+{
+	out << setw(10) << fio<< " " << setw(10) << fio1 << " " << setw(10) << fio2 << " " << setw(8) << k << setw(8) << ves << endl;
+}
+int main()
+{
+	point a[10]; // описываем массив структур
+	int v;
+	int i, j, n = 0;
+	if (!in)
+		cout << "Ошибка при открытии файла input.txt\n";
+	else
+	{
+		while (in.peek() != EOF) // чтение данных из файла
+		{
+			in >> a[n].fio;
+			in >> a[n].fio1;
+			in >> a[n].fio2;
+			in >> a[n].k; 
+			in >> a[n].ves;
+			// вывод прочтенных данных на экран через член-функцию
+			a[n].show();
+			n++;
+		};
+			cin >> v;
+			if (!out)
+				cout << "Ошибка при открытии файла output. txt\n";
+			else
+			{
+				j= 0;
+				for (i = 0; i < n && !j; i++)
+					// поиск структуры по совпадению поля // number с пит для удаления 
+					if (a[i].ves > v)
+				{
+					// выполняем савиг 6 массиве на одну позицию вправо 
+						for (j = i; j < n - 1; j++)
+						a[j] = a[j + 1];
+					n--; // уменьшаем количество книг на 1 после удаления
+				}
+				// записываем результат 6 новый файл
+				for (i = 0; i < n; i++)
+					// вывод данных В файл через член - функцию структуры 
+					a[i].print();
+			}
+		} in.close();
+		out.close(); // закрываем потоки
+		return 0;
+	}
