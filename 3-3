@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a;
+    for(int i = 10; i <= 99; i++){
+        if(i%10 != (i%10)/10){
+            cout << i << " ";
+        }
+    }
+
+    return 0;
+}
+
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a = 10;
+    while(a <= 99){
+        if(a%10 != (a%10)/10){
+            cout << a << " ";
+        }
+        a++;
+    }
+
+    return 0;
+}
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a = 10;
+    do{
+        if(a%10 != (a%10)/10){
+            cout << a << " ";
+        }
+        a++;
+    }while(a <= 99);
+
+    return 0;
+}
