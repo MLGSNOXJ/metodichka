@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    setlocale(LC_ALL, "Russian");
+    int v;
+    cout << "Chanel\n";
+    cout << "1 - Россия 1\n";
+    cout << "2 - Первый \n";
+    cout << "3 - СТС\n";
+    cin >> v;
+    switch (v) 
+    {
+case 1:
+  cout << "\tВести\n\tМестное время\n\tКитайский новый год";
+  break;
+case 2:
+  cout << "\tВремя покажет\n\tмужское женское\n\tВремя";
+  break;
+case 3:
+  cout << "\tУральские пельмени\n\tМаска танцы\n\t6 кадров";
+  break;
+default:
+  cout << "Error";
+  break;
+    }
+    cout << "\n";
+}
