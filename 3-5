@@ -1,0 +1,27 @@
+#include <cmath>
+using namespace std;
+
+int f(float x) {
+    if (x < 1) {
+        cout << "No";
+    }
+    else {
+        return log(abs(3*x)) * sqrt(2*pow(x,5) - 1);
+    }
+} 
+    int main() {
+        float a, b, h, x;
+        cout << "a= ";
+        cin >> a;
+        cout << "b= ";
+        cin >> b;
+        cout << "h= ";
+        cin >> h;
+        cout << "x\tf(x)\n";
+            for (x = a; x <= b; x += h) {
+                cout << x << "\t";
+                cout << f(x);
+                cout << endl;
+            }
+        return 0;
+    }
