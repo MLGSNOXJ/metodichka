@@ -1,0 +1,17 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "Russian");
+    double x, y;
+    cout << "Vvedite coordinaty tochek x y:\n";
+    cin >> x >> y;
+    double r = sqrt(x*x + y*y), eps = pow(10, -9);
+    if (r < 15 && y > 0 && y > x && y > -x){
+        cout << "Yes";
+    }else if ((y >= 0 && y >= x && y >= -x && (r >= (15-eps) && r <= (15+eps))) || (y == abs(x) && r <= (15 + eps) )){
+        cout << "On board";
+    }else{
+        cout << "No";
+    }
+}
