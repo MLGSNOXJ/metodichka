@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+void f(int a) {
+        if (a % 10 == a) {
+            cout << a << endl;
+            return;
+        }
+        f(a / 10);
+        cout << a % 10 << endl;
+}
+int main()
+{
+    int a,b;
+    cin >> a >> b;
+    for (int i = a; i <= b; i++) {
+        f(i);
+    }
+    return 0;
+}
+
