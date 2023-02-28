@@ -56,4 +56,21 @@ int main()
 	cout << f(x, y);
 }
 
+#include <iostream>
+using namespace std;
 
+int f(int x, int y) {
+	if (x == y)
+		return 1;
+	if (x > y)
+		return 0;
+	if (x < y)
+		return f(x+3, y) + f(x+5, y);
+}
+
+int main()
+{
+	int a, b;
+	cin >> b;
+	cout << f(0, b);
+}
