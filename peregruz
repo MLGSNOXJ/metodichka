@@ -1,0 +1,51 @@
+#include <iostream>
+#include <iostream>
+#include <cmath>                                                                                
+using namespace std;
+
+float f(float x) {
+    if (abs(x) < 3.14/2) {
+        return sin(x);
+    }
+    else if (abs(x) >= 3.14/2 && abs(x) <= 3.14) {
+        return cos(x);
+    }
+    else if (abs(x) >= 3.14) {
+        return 0;
+    }
+}
+void f(float x, float &y) {
+    if (abs(x) < 3.14/2) {
+        y = sin(x);
+    }
+    else if (abs(x) >= 3.14/2 && abs(x) <= 3.14) {
+        y = cos(x);
+    }
+    else if (abs(x) >= 3.14) {
+        y = 0;
+    }
+}
+
+int main() {
+
+    float a, b, h, x, y;
+    cout << "a= ";
+    cin >> a;
+    cout << "b= ";
+    cin >> b;
+    cout << "h= ";
+    cin >> h;
+    cout << "x\tf(x)\n";
+    for (x = a; x <= b; x += h) {
+        cout << x << "\t";
+        cout << f(x);
+        cout << endl;
+    }
+    for (x = a; x <= b; x += h) {
+        f(x,y);
+        cout << x << "\t";
+        cout << y;
+        cout << endl;
+    }
+
+}
