@@ -12,3 +12,17 @@ int main(){
   a--;
   cout << a;
 }
+
+2)class BowlingBall {
+public:
+    bool operator<(const BowlingBall& other) const {
+        return weight < other.weight;
+    }
+
+    bool operator==(const BowlingBall& other) const {
+        return (weight == other.weight) && (color == other.color);
+    }
+
+private:
+    int weight;
+    string color;
