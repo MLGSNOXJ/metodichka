@@ -1,0 +1,99 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+using namespace std;
+
+ifstream in("input.txt");
+ofstream out("output.txt");
+// Определение структуры "stud"
+struct stud {
+    string surname, name, secname;
+    int number, year, m1, m2, m3, m4, m5;
+    void print();
+};
+
+
+// Определение функции "print" для структуры "stud"
+void stud::print() {
+    // Вывод информации о студенте в файл
+    out << number << " " << surname << " " << name << " " << secname << " " << year << " " << m1 << " " << m2 << " " << m3 << " " << m4 << " " << m5 << endl;
+}
+// Определение функции "bubble" для сортировки пузырьком
+void bubble(stud* a, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = n - 1; j > i; j--) {
+            auto s1 = a[j - 1];
+            auto s2 = a[j];
+            if (s1.surname > s2.surname) {
+                auto temp = a[j - 1];
+                a[j - 1] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
+}
+// Определение функции "vstav" для сортировки вставками
+void vstav(stud* a, int n) {
+    int i, j;
+    for (i = 1; i < n; i++) {
+        j = i;
+        while (j > 0 && a[j].surname < a[j - 1].surname) {
+            auto temp = a[j];
+            a[j] = a[j - 1];
+            a[j - 1] = temp;
+            j--;
+        }
+    }
+}
+// Определение функции "choose" для сортировки выбором
+void choose(stud* a, int n) {
+    stud temp;
+    int lowindex;
+    string lowkey;
+    for (int i = 0; i < n - 1; i++) {
+        lowindex = i;
+        lowkey = a[i].surname;
+        for (int j = i + 1; j < n; j++) {
+            if (a[j].surname < lowkey) {
+                lowkey = a[j].surname;
+                lowindex = j;
+            }
+
+        }
+        temp = a[i];
+        a[i] = a[lowindex];
+        a[lowindex] = temp;
+    }
+}
+// Основная функция программы
+int main() {
+    // Установка локали для корректного отображения русских символов
+    setlocale(LC_ALL, "Russian");
+    // Создание массива структур "stud" и счетчика элементов
+    stud human[10];
+    int n = 0;
+    // Чтение данных из файла "input.txt" и запись в массив структур "human"
+    while (in.peek() != EOF) {
+        in >> human[n].number;
+        in >> human[n].surname;
+        in >> human[n].name;
+        in >> human[n].secname;
+        in >> human[n].year;
+        in >> human[n].m1;
+        in >> human[n].m2;
+        in >> human[n].m3;
+        in >> human[n].m4;
+        in >> human[n].m5;
+        n++;
+    }
+    // Сортировка массива структур "human" по фамилии с помощью функции "choose"
+    bubble(human, n);
+    // Вывод отсортированного массива структур "human" в файл "output.txt" с помощью функции "print"
+    for (int i = 0; i < n; i++) {
+        human[i].print();
+    }
+    // Закрытие файловых потоков и завершение программы
+    in.close();
+    out.close();
+    return 0;
+}
