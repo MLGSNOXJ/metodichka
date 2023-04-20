@@ -1,0 +1,19 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int main() {
+    vector<int> arr; // создаем вектор
+    int n; // переменная для ввода значений
+    cout << "Введите элементы массива: " << endl;
+    for(int i = 0; i < 5; i++) { // заполняем вектор значениями
+        cin >> n;
+        arr.push_back(n);// вставляем новый элемент в конец вектора
+    }
+    arr[arr.size()-2] = arr[0] % 10; // заменяем предпоследний элемент на младшую цифру первого элемента
+    cout << "Новый массив: ";
+    for(int i = 0; i < arr.size(); i++) { // выводим новый массив на экран
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
