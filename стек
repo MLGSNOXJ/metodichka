@@ -1,0 +1,73 @@
+#include <iostream>
+#include <math.h>
+#include <string>
+#include <vector>
+using namespace std;
+class Stack
+{
+    struct Element
+    {
+        int inf;
+        Element *next;
+        Element(int x, Element *p) : inf(x), next(p){}
+    };
+    Element *head;
+public:
+    Stack() : head(0)
+    {}
+    bool Empty()
+    {
+        return head == 0;
+    }
+    void push(int num) { // добавление элемента в стек
+        head = new Element(num, head);
+    }
+    int Pop() // удаление элемента из стека
+    {
+        if(Empty()) //если пуст, ничего не делаем
+        {
+            return 0;
+        }
+        //иначе запоминаем указатель на вершину стека
+        Element *r = head;
+        //запминаем информацию из верхнего стека
+        int i = r->inf;
+        //передвигаем указатель стека на следущий от вершины
+        head = r->next;
+        delete r;//освобождаем память, на которую указывет r
+        return i;//возвращаем значение
+    }
+
+    int top() { // получение значения верхнего элемента стека
+        if (Empty()) { // если стек пустой
+            return 0; 
+        } else
+        {
+            return head -> inf; // возвращаем информацию из вершины
+        }
+       
+    }
+
+
+    int size() { // получение количества элементов в стеке
+        if (Empty()) { // если стек пустой
+            return 0; 
+        }
+        else{
+            return head + 1;
+        }
+        
+    }
+
+void removeMaxElements(Stack& stack) {
+    int maxValue = -100000000000000000000;
+
+    // Находим максимальное значение в стеке
+    Element* current = stack.head;
+    while (current != nullptr) {
+        if (current-> num > maxValue) {
+            maxValue = current->num;
+        }
+        current = current->next;
+    }
+}
