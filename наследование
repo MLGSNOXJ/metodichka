@@ -1,0 +1,107 @@
+#include <iostream>
+#include <math.h>
+#include <string>
+
+using namespace std;
+
+// Создаем абстрактный класс Function
+class Function 
+{
+public:
+    // Объявляем абстрактные методы, которые будут реализованы в наследниках
+    virtual double show(double x) = 0;
+    virtual void info() = 0;
+};
+
+// Создаем класс Line, который наследуется от класса Function
+class Line : public Function
+{
+protected: 
+    double a,b;
+public: 
+    // Создаем конструкторы
+    Line() : a(0), b(0)
+    {}
+    Line(double a, double b) : a(a), b(b)
+    {}
+    // Реализуем методы, объявленные в абстрактном классе
+    double show(double x) {
+        return a*x + b;
+    }
+    void info() {
+        cout << "y = " << a << "x + " << b << endl;
+    }
+
+};
+
+// Создаем класс Kub, который наследуется от класса Function
+class Kub : public Function
+{
+protected: 
+    double a,b,c;
+public: 
+    // Создаем конструкторы
+    Kub() : a(0), b(0), c(0)
+    {}
+    Kub(double a, double b, double c) : a(a), b(b), c(c)
+    {}
+    // Реализуем методы, объявленные в абстрактном классе
+    double show(double x) {
+        return a*x*x + b*x + c;
+    }
+    void info() {
+        cout << "y = " << a << "x^2 + " << b << "x + " << c << endl;
+    }
+
+};
+
+// Создаем класс Hyperbola, который наследуется от класса Function
+class Hyperbola : public Function
+{
+protected:
+    double a;
+public:
+    // Создаем конструкторы
+    Hyperbola() : a(0)
+    {}
+    Hyperbola(double a) : a(a)
+    {}
+    // Реализуем методы, объявленные в абстрактном классе
+     double show(double x) {
+        return a/x;
+    }
+    void info() {
+        cout << "y = " << a << "/x" << endl;
+    }
+};
+
+// Основная функция программы
+int main() {
+    // Считываем значения переменных
+    int a, b;
+    cin >> a >> b;
+    int a1, b1, c1;
+    cin >> a1 >> b1 >> c1;
+    int a2;
+    cin >> a2;
+
+    // Создаем массив указателей на объекты классов
+    Function* n[3];
+    n[0] = new Line(a, b);
+    n[1] = new Kub(a1, b1, c1);
+    n[2] = new Hyperbola(a2);
+
+    // Считываем значение переменной x
+    double x;
+    cin >> x;
+
+    // Выводим информацию о каждом объекте и значение функции для заданного x
+    for (int i = 0; i < 3; i++) {
+        n[i]->info();
+        cout << "f(" << x << ") = " << n[i]->show(x) << endl;
+    }
+
+    // Завершаем программу
+    return 0;
+}
+
