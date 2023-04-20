@@ -17,3 +17,34 @@ int main() {
     cout << endl;
     return 0;
 }
+
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+int main() {
+    list<int> myList; // создаем список
+    int n; // переменная для ввода значений
+    for (int i = 0; i < 5; i++) { // заполняем список значениями
+        cin >> n;
+        myList.push_back(n);
+    }
+
+    list<int>::iterator it = myList.end(); // создаем итератор на последний элемент
+    int last = *(--it); // сохраняем значение последнего элемента
+    int prev = *(--it); // сохраняем значение предпоследнего элемента
+
+    if (last < prev) { // если последний элемент меньше предпоследнего
+        myList.pop_back(); // удаляем последний элемент
+    } else {
+        myList.erase(--it); // удаляем предпоследний элемент
+    }
+
+    for (it = myList.begin(); it != myList.end(); it++) { // выводим список на экран
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
