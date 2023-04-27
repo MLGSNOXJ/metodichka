@@ -1,73 +1,85 @@
-#include <iostream>
-#include <math.h>
-#include <string>
-#include <vector>
+#include <iostream> // стандартная библиотека ввода-вывода
+#include <math.h> // математическая библиотека
+#include <string> // библиотека для работы со строками
+#include <vector> // библиотека для работы с векторами
+
 using namespace std;
+
+// Объявление класса Stack
 class Stack
 {
-    struct Element
+    struct Element // объявление структуры элемента стека
     {
-        int inf;
-        Element *next;
-        Element(int x, Element *p) : inf(x), next(p){}
+        int inf; // значение элемента
+        Element *next; // указатель на следующий элемент
+        Element(int x, Element *p) : inf(x), next(p){} // конструктор элемента
     };
-    Element *head;
+    Element *head; // указатель на вершину стека
 public:
-    Stack() : head(0)
+    Stack() : head(0) // конструктор стека
     {}
-    bool Empty()
+    bool Empty() // проверка на пустоту стека
     {
         return head == 0;
     }
     void push(int num) { // добавление элемента в стек
         head = new Element(num, head);
     }
-    int Pop() // удаление элемента из стека
+    int Pop() // извлечение элемента из стека
     {
-        if(Empty()) //если пуст, ничего не делаем
+        if(Empty()) // если стек пустой
         {
-            return 0;
+            return 0; // возвращаем 0
         }
-        //иначе запоминаем указатель на вершину стека
-        Element *r = head;
-        //запминаем информацию из верхнего стека
-        int i = r->inf;
-        //передвигаем указатель стека на следущий от вершины
-        head = r->next;
-        delete r;//освобождаем память, на которую указывет r
-        return i;//возвращаем значение
+        
+        Element *r = head; // создаем указатель на вершину стека
+        
+        int i = r->inf; // сохраняем значение вершины стека
+        
+        head = r->next; // перемещаем указатель на следующий элемент
+        delete r; // удаляем вершину стека
+        return i; // возвращаем сохраненное значение вершины стека
     }
 
-    int top() { // получение значения верхнего элемента стека
+    int top() { // возвращение значения вершины стека
         if (Empty()) { // если стек пустой
-            return 0; 
+            return 0; // возвращаем 0
         } else
         {
-            return head -> inf; // возвращаем информацию из вершины
+            return head -> inf; // возвращаем значение вершины стека
         }
        
     }
+};
 
+// Главная функция
 
-    int size() { // получение количества элементов в стеке
-        if (Empty()) { // если стек пустой
-            return 0; 
+     int main()
+{
+    Stack s;
+    int n;
+    cin >> n; // количество элементов в стеке
+    int max = -1000000000000000000000000000000; // переменная для хранения максимального значения
+    for (int i = 0; i < n; i++) {
+        int num;
+        cin >> num; // вводим элементы стека
+        if (num > max) { // если новый элемент больше максимального
+            max = num; // обновляем значение максимального элемента
         }
-        else{
-            return head + 1;
-        }
-        
+        s.push(num); // добавляем элемент в стек
     }
-
-void removeMaxElements(Stack& stack) {
-    int maxValue = -100000000000000000000;
-
-    // Находим максимальное значение в стеке
-    Element* current = stack.head;
-    while (current != nullptr) {
-        if (current-> num > maxValue) {
-            maxValue = current->num;
+    Stack temp; // создаем временный стек
+    while (!s.Empty()) { // пока стек не пустой
+        int num = s.top(); // сохраняем значение верхнего элемента
+        s.Pop(); // удаляем верхний элемент
+        if (num != max) { // если значение элемента не равно максимальному
+            temp.push(num); // добавляем элемент во временный стек
         }
-        current = current->next;
     }
+    while (!temp.Empty()) { // пока временный стек не пустой
+        cout << temp.top() << " "; // выводим элементы стека на экран
+        temp.Pop(); // удаляем элемент из временного стека
+    }
+    return 0;
 }
+
