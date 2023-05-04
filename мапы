@@ -1,0 +1,32 @@
+#include <iostream>
+#include <map> 
+#include <vector> 
+using namespace std;
+
+int main() {
+    // Создаем словарь, где ключ - число, а значение - вектор его позиций в исходном массиве
+    map<int, vector<int>> positions;
+    int n;
+    // Запрашиваем у пользователя количество чисел
+    cout << "Введите количество чисел: ";
+    cin >> n;
+    // Запрашиваем у пользователя числа и заполняем словарь
+    cout << "Введите числа: ";
+    for (int i = 0; i < n; i++) {
+        int num;
+        cin >> num;
+        // Добавляем позицию числа в вектор для этого числа и его отрицательного значения
+        positions[num].push_back(i);
+        positions[-num].push_back(i);
+    }
+    // Выводим на экран
+    for (auto const& entry : positions) {
+        cout << entry.first << ": ";
+        for (auto const& pos : entry.second) {
+            cout << pos << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+
