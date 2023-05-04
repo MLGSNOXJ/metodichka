@@ -1,0 +1,110 @@
+#include <iostream> 
+#include <vector> 
+#include <algorithm> 
+#include <cmath> 
+using namespace std;
+// определяем структуру Point, которая содержит координаты точки на плоскости
+struct Point {
+    double x, y;
+};
+
+// главная функция программы
+int main() {
+    const double R = 5.0; // задаем радиус окружности
+    // создаем массив точек, используя инициализацию списка
+    vector<Point> points = { {2.0, 3.0}, {4.0, 5.0}, {-1.0, 2.0}, {3.0, -4.0}, {-2.0, -2.0}, {6.0, 7.0} };
+
+    // удаляем точки, находящиеся внутри окружности с радиусом R и центром в начале координат
+    points.erase(remove_if(points.begin(), points.end(), [R](const Point& p) { // используем алгоритм remove_if и лямбда-выражение
+        return sqrt(p.x * p.x + p.y * p.y) < R; // условие для удаления точки
+    }), points.end()); // удаляем точки из массива
+
+    // выводим оставшиеся точки
+    for (const auto& p : points) { // используем цикл for-each и ссылку на константу
+        cout << "(" << p.x << ", " << p.y << ")" << endl; // выводим координаты точки
+    }
+
+    return 0; // возвращаем ноль, чтобы показать, что программа завершилась успешно
+}
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <numeric>
+
+using namespace std;
+
+
+int main() {
+    // Создаём вектор пар целых чисел
+    vector<pair<int, int>> points = {{-2, 3}, {4, -5}, {1, 2}, {-3, -1}, {0, 0}};
+    
+    // Вычисляем сумму отрицательных значений координат X точек
+    int sum_x = accumulate(points.begin(), points.end(), 0, 
+        [](int acc, const pair<int, int>& p) {
+            return (p.first < 0) ? acc + p.first : acc;
+        });
+    
+    // Выводим результат на экран
+    cout << sum_x << endl;
+    
+    // Завершаем программу
+    return 0;
+}
+
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+struct Point {
+    double x;
+    double y;
+
+    Point(double x, double y) : x(x), y(y) {}
+};
+
+int main() {
+    vector<Point> points = {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 10}};
+
+    auto max_point = max_element(points.begin(), points.end(),
+        [](const Point& p1, const Point& p2) {
+            return sqrt(p1.x * p1.x + p1.y * p1.y) < (p2.x * p2.x + p2.y * p2.y);
+        });
+
+    cout << max_point->x << ", " << max_point->y << endl;
+
+    return 0;
+}
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+struct Point {
+    int x, y;
+};
+
+int cmp(const Point& a, const Point& b) {
+    if (a.x == b.x) {
+        return a.y < b.y;
+    } else {
+        return a.x > b.x;
+    }
+}
+
+int main() {
+    vector<Point> points = {{1, 2}, {3, 4}, {5, 6}, {1, 7}, {3, 8}, {5, 9}};
+
+    sort(points.begin(), points.end(), cmp);
+
+    for (const auto& p : points) {
+        cout << "(" << p.x << ", " << p.y << ")" << endl;
+    }
+
+    return 0;
+}
