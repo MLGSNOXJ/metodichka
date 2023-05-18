@@ -1,0 +1,114 @@
+#include <iostream>
+#include <list>
+
+using namespace std;
+
+class Node{
+public:
+    int data; 
+    Node* next; 
+
+    Node(int data) {
+        this->data = data;
+        this->next = NULL;
+    }
+};
+class LinkedList{
+public:
+    Node* head;
+
+    LinkedList(){
+        this->head = NULL;
+    }
+
+    void push(int data) { 
+        Node* newNode = new Node(data);
+        if (this->head == NULL) {
+            this->head = newNode;
+        }
+        else {
+            Node* current = this->head;
+            while (current->next != NULL) {
+                current = current->next;
+            }
+            current->next = newNode;
+        }
+    }
+
+    void removeMax(){
+        if(head == NULL){
+            return;
+        }
+
+        int max_val = head->data;
+        Node* curr = head;
+
+        while(curr != NULL){
+            if(curr->data > max_val){
+                max_val = curr->data;
+            }
+            curr = curr->next;
+        }
+
+        while(head != NULL && head->data == max_val){
+            Node* temp = head;
+            head = head->next;
+            delete temp;
+        }
+
+        if(head == NULL){
+            return;
+        }
+
+        Node* prev = head;
+        curr = head->next;
+
+        while(curr != NULL){
+            if(curr->data == max_val){
+                prev->next = curr->next;
+                delete curr;
+                curr = prev->next;
+            }
+            else{
+                prev = curr;
+                curr = curr->next;
+            }
+        }
+    }
+
+    void printList(){
+        Node* curr = head;
+
+        while(curr != NULL){
+            cout << curr->data << " ";
+            curr = curr->next;
+        }
+        cout << endl;
+    }
+};
+
+int main(){
+    LinkedList list;
+    
+    int n;
+    cin >> n; // количество элементов в стеке
+    int max = -1000000; // переменная для хранения максимального значения
+    for (int i = 0; i < n; i++) {
+        int num;
+        cin >> num; // вводим элементы стека
+        if (num > max) { // если новый элемент больше максимального
+            max = num; // обновляем значение максимального элемента
+        }
+        list.push(num); // добавляем элемент в стек
+    }
+
+    cout << "Original List: ";
+    list.printList();
+
+    list.removeMax();
+
+    cout << "List after removing max value: ";
+    list.printList();
+
+    return 0;
+}
