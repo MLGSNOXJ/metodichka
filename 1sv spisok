@@ -3,46 +3,54 @@
 
 using namespace std;
 
+// Создаем класс Node для хранения узлов связного списка
 class Node{
 public:
-    int data; 
-    Node* next; 
+    int data; // данные узла
+    Node* next; // указатель на следующий узел
 
+    // Конструктор класса Node
     Node(int data) {
         this->data = data;
         this->next = NULL;
     }
 };
+
+// Создаем класс LinkedList для работы со связным списком
 class LinkedList{
 public:
-    Node* head;
+    Node* head; // указатель на головной узел списка
 
+    // Конструктор класса LinkedList
     LinkedList(){
         this->head = NULL;
     }
 
+    // Метод push для добавления элемента в конец списка
     void push(int data) { 
-        Node* newNode = new Node(data);
-        if (this->head == NULL) {
-            this->head = newNode;
+        Node* newNode = new Node(data); // Создаем новый узел
+        if (this->head == NULL) { // Если список пустой
+            this->head = newNode; // Новый узел становится головным
         }
-        else {
-            Node* current = this->head;
-            while (current->next != NULL) {
+        else { // Если список не пустой
+            Node* current = this->head; 
+            while (current->next != NULL) { // Идем до конца списка
                 current = current->next;
             }
-            current->next = newNode;
+            current->next = newNode; // Добавляем новый узел в конец списка
         }
     }
 
+    // Метод removeMax для удаления максимального значения из списка
     void removeMax(){
-        if(head == NULL){
+        if(head == NULL){ // Если список пустой
             return;
         }
 
-        int max_val = head->data;
+        int max_val = head->data; // Переменная для хранения максимального значения
         Node* curr = head;
 
+        // Ищем максимальное значение в списке
         while(curr != NULL){
             if(curr->data > max_val){
                 max_val = curr->data;
@@ -50,16 +58,18 @@ public:
             curr = curr->next;
         }
 
+        // Удаляем все узлы с максимальным значением из начала списка
         while(head != NULL && head->data == max_val){
             Node* temp = head;
             head = head->next;
             delete temp;
         }
 
-        if(head == NULL){
+        if(head == NULL){ // Если список стал пустым
             return;
         }
 
+        // Удаляем оставшиеся узлы с максимальным значением
         Node* prev = head;
         curr = head->next;
 
@@ -76,10 +86,11 @@ public:
         }
     }
 
+    // Метод printList для вывода списка на экран
     void printList(){
         Node* curr = head;
 
-        while(curr != NULL){
+        while(curr != NULL){ // Идем по списку и выводим значения узлов
             cout << curr->data << " ";
             curr = curr->next;
         }
@@ -87,28 +98,29 @@ public:
     }
 };
 
+// Главная функция программы
 int main(){
     LinkedList list;
-    
+
     int n;
-    cin >> n; // количество элементов в стеке
-    int max = -1000000; // переменная для хранения максимального значения
+    cin >> n; // Вводим количество элементов в списке
+    int max = -1000000; // Переменная для хранения максимального значения
     for (int i = 0; i < n; i++) {
         int num;
-        cin >> num; // вводим элементы стека
-        if (num > max) { // если новый элемент больше максимального
-            max = num; // обновляем значение максимального элемента
+        cin >> num; // Вводим элементы списка
+        if (num > max) { // Если новый элемент больше максимального
+            max = num; // Обновляем значение максимального элемента
         }
-        list.push(num); // добавляем элемент в стек
+        list.push(num); // Добавляем элемент в список
     }
 
     cout << "Original List: ";
-    list.printList();
+    list.printList(); // Выводим исходный список на экран
 
-    list.removeMax();
+    list.removeMax(); // Удаляем максимальное значение из списка
 
     cout << "List after removing max value: ";
-    list.printList();
+    list.printList(); // Выводим измененный список на экран
 
     return 0;
 }
