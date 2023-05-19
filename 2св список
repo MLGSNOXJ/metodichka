@@ -3,12 +3,14 @@
 
 using namespace std;
 
+// создаем класс Node для узла связного списка
 class Node{
 public:
-    int data; 
-    Node* next; 
-    Node* prev;
+    int data; // значение узла
+    Node* next; // указатель на следующий узел
+    Node* prev; // указатель на предыдущий узел
 
+    // конструктор класса Node
     Node(int data) {
         this->data = data;
         this->next = NULL;
@@ -16,37 +18,42 @@ public:
     }
 };
 
+// создаем класс LinkedList для связного списка
 class LinkedList{
 public:
-    Node* head;
-    Node* tail;
+    Node* head; // указатель на начало списка
+    Node* tail; // указатель на конец списка
 
+    // конструктор класса LinkedList
     LinkedList(){
         this->head = NULL;
         this->tail = NULL;
     }
 
+    // метод для добавления нового элемента в список
     void push(int data) { 
-        Node* newNode = new Node(data);
-        if (this->head == NULL) {
-            this->head = newNode;
-            this->tail = newNode;
+        Node* newNode = new Node(data); // создаем новый узел
+        if (this->head == NULL) { // если список пуст
+            this->head = newNode; // новый узел становится началом списка
+            this->tail = newNode; // новый узел становится концом списка
         }
-        else {
-            newNode->prev = this->tail;
-            this->tail->next = newNode;
-            this->tail = newNode;
+        else { // если список не пуст
+            newNode->prev = this->tail; // предыдущий узел нового узла - это текущий конец списка
+            this->tail->next = newNode; // следующий узел текущего конца списка - это новый узел
+            this->tail = newNode; // новый узел становится концом списка
         }
     }
 
+    // метод для удаления узлов с максимальным значением
     void removeMax(){
-        if(head == NULL){
-            return;
+        if(head == NULL){ // если список пуст
+            return; // выходим из метода
         }
 
-        int max_val = head->data;
-        Node* curr = head;
+        int max_val = head->data; // начальное значение максимального элемента - значение первого узла списка
+        Node* curr = head; // текущий узел - первый узел списка
 
+        // находим максимальный элемент в списке
         while(curr != NULL){
             if(curr->data > max_val){
                 max_val = curr->data;
@@ -54,6 +61,7 @@ public:
             curr = curr->next;
         }
 
+        // удаляем узлы с максимальным значением
         while(head != NULL && head->data == max_val){
             Node* temp = head;
             head = head->next;
@@ -61,13 +69,14 @@ public:
             delete temp;
         }
 
-        if(head == NULL){
-            return;
+        if(head == NULL){ // если список пуст
+            return; // выходим из метода
         }
 
-        Node* prev = head;
-        curr = head->next;
+        Node* prev = head; // предыдущий узел - первый узел списка
+        curr = head->next; // текущий узел - второй узел списка
 
+        // проходим по списку и удаляем узлы с максимальным значением
         while(curr != NULL){
             if(curr->data == max_val){
                 prev->next = curr->next;
@@ -84,6 +93,7 @@ public:
         }
     }
 
+    // метод для вывода списка на экран
     void printList(){
         Node* curr = head;
 
@@ -95,11 +105,12 @@ public:
     }
 };
 
+// главная функция программы
 int main(){
     LinkedList list;
-    
+
     int n;
-    cin >> n; // количество элементов в стеке
+    cin >> n; // вводим количество элементов в стеке
     int max = -1000000; // переменная для хранения максимального значения
     for (int i = 0; i < n; i++) {
         int num;
@@ -111,12 +122,13 @@ int main(){
     }
 
     cout << "Original List: ";
-    list.printList();
+    list.printList(); // выводим исходный список на экран
 
-    list.removeMax();
+    list.removeMax(); // удаляем узлы с максимальным значением
 
     cout << "List after removing max value: ";
-    list.printList();
+    list.printList(); // выводим измененный список на экран
 
     return 0;
 }
+
