@@ -1,0 +1,191 @@
+#include <iostream> // для ввода/вывода
+#include <list> // для использования списка
+#include <string> // для работы со строками
+
+using namespace std;
+
+// Создаем класс LotteryTicket
+class LotteryTicket {
+public:
+    int number; // номер билета
+    string info; // информация о билете
+
+    // Конструктор класса
+    LotteryTicket(int n, string i) {
+        number = n;
+        info = i;
+    }
+};
+
+// Создаем класс LotteryTicketList
+class LotteryTicketList {
+private:
+    list<LotteryTicket> tickets; // список билетов
+
+public:
+    // Метод добавления билета в список
+    void addTicket(LotteryTicket ticket) {
+        tickets.push_back(ticket);
+    }
+
+    // Метод перемещения билета в конец списка
+    void moveTicketToEnd(int ticketNumber) {
+        for (auto it = tickets.begin(); it != tickets.end(); ++it) {
+            if (it->number == ticketNumber) {
+                tickets.splice(tickets.end(), tickets, it);
+                break;
+            }
+        }
+    }
+
+    // Метод удаления последнего четного билета из списка
+    void removeLastEvenTicket() {
+        if (tickets.empty()) { // если список пустой, выходим из метода
+            return;
+        }
+        auto lastTicket = --tickets.end(); // получаем итератор на последний элемент списка
+        if (lastTicket->number % 2 == 0) { // если номер последнего билета четный
+            tickets.erase(lastTicket); // удаляем его из списка
+        }
+    }
+
+    // Метод вывода списка билетов на экран
+    void printTickets() {
+        for (auto ticket : tickets) {
+            cout << ticket.number << " " << ticket.info << endl;
+        }
+    }
+};
+
+// Основная функция программы
+int main() {
+    LotteryTicketList ticketList; // создаем список билетов
+
+    int n1, n2, n3;
+    string i1 = "First ticket", i2 = "Second ticket", i3 = "Third ticket";
+
+    // Запрашиваем номера билетов у пользователя
+    cout << "first ticket: ";
+    cin >> n1;
+    cout << "second ticket: ";
+    cin >> n2;
+    cout << "third ticket: ";
+    cin >> n3;
+
+    // Добавляем билеты в список
+    ticketList.addTicket(LotteryTicket(n1, i1));
+    ticketList.addTicket(LotteryTicket(n2, i2));
+    ticketList.addTicket(LotteryTicket(n3, i3));
+
+    int moveTicketNumber;
+    // Запрашиваем номер билета, который нужно переместить в конец списка
+    cout << "ticket in end: ";
+    cin >> moveTicketNumber;
+    ticketList.moveTicketToEnd(moveTicketNumber); // перемещаем билет в конец списка
+    ticketList.printTickets(); // выводим список билетов на экран
+
+    ticketList.removeLastEvenTicket(); // удаляем последний четный билет из списка
+    ticketList.printTickets(); // выводим список билетов на экран
+
+    return 0;
+}
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+// Определяем класс билета в лотерее
+class LotteryTicket {
+public:
+    int number; // Номер билета
+    string info; // Дополнительная информация о билете
+
+    // Конструктор класса
+    LotteryTicket(int n, string i) {
+        number = n;
+        info = i;
+    }
+};
+
+// Определяем класс списка билетов в лотерее
+class LotteryTicketList {
+private:
+    vector<LotteryTicket> tickets; // Вектор для хранения билетов
+
+public:
+    // Метод для добавления билета в список
+    void addTicket(LotteryTicket ticket) {
+        tickets.push_back(ticket);
+    }
+
+    // Метод для перемещения билета в конец списка по его номеру
+    void moveTicketToEnd(int ticketNumber) {
+        for (int i = 0; i < tickets.size(); ++i) {
+            if (tickets[i].number == ticketNumber) { // Найден нужный билет
+                LotteryTicket temp = tickets[i]; // Сохраняем его во временную переменную
+                for (int j = i; j < tickets.size() - 1; ++j) { // Сдвигаем все билеты влево
+                    tickets[j] = tickets[j + 1];
+                }
+                tickets[tickets.size() - 1] = temp; // Помещаем нужный билет в конец списка
+                break; // Прерываем цикл
+            }
+        }
+    }
+
+    // Метод для инвертирования цифр номера билета по его индексу в списке
+    void reverseDigits(int ticketIndex) {
+        int number = tickets[ticketIndex].number;
+        int reversedNumber = 0;
+        while (number > 0) { // Инвертируем цифры
+            reversedNumber = reversedNumber * 10 + number % 10;
+            number /= 10;
+        }
+        tickets[ticketIndex].number = reversedNumber; // Сохраняем инвертированный номер билета
+    }
+
+    // Метод для вывода списка билетов на экран
+    void printTickets() {
+        for (auto ticket : tickets) { // Используем цикл for-each для перебора всех билетов в списке
+            cout << ticket.number << " " << ticket.info << endl;
+        }
+    }
+};
+
+// Главная функция программы
+int main() {
+    LotteryTicketList ticketList; // Создаем список билетов
+
+    // Получаем номера билетов от пользователя и добавляем их в список
+    int n1, n2, n3;
+    string i1 = "First ticket", i2 = "Second ticket", i3 = "Third ticket";
+    cout << "first ticket: ";
+    cin >> n1;
+    cout << "second ticket: ";
+    cin >> n2;
+    cout << "third ticket: ";
+    cin >> n3;
+    ticketList.addTicket(LotteryTicket(n1, i1));
+    ticketList.addTicket(LotteryTicket(n2, i2));
+    ticketList.addTicket(LotteryTicket(n3, i3));
+
+    // Перемещаем выбранный пользователем билет в конец списка и выводим список на экран
+    int moveTicketNumber;
+    cout << "ticket in end: ";
+    cin >> moveTicketNumber;
+    ticketList.moveTicketToEnd(moveTicketNumber);
+    ticketList.printTickets();
+
+    // Инвертируем цифры номера выбранного пользователем билета и выводим список на экран
+    int reverseTicketIndex;
+    cout << "reverse ticket: ";
+    cin >> reverseTicketIndex;
+    ticketList.reverseDigits(reverseTicketIndex);
+    ticketList.printTickets();
+
+    return 0;
+}
