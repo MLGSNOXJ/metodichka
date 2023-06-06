@@ -1,0 +1,38 @@
+#include <iostream> // для ввода и вывода данных
+#include <algorithm> // для использования функции adjacent_find
+#include <vector> // для работы с векторами
+
+using namespace std; // используем стандартное пространство имен
+
+// Создаем класс Sound
+class Sound {
+public:
+    int noteHeight; // высота ноты
+    int duration; // длительность звучания
+};
+
+// Основная функция программы
+int main() {
+    
+    // Создаем вектор melody и заполняем его объектами класса Sound
+    vector<Sound> melody = {{1, 2}, {2, 3}, {3, 1}, {3, 2}, {4, 4}, {5, 2}, {5, 3}};
+
+    // Ищем первую пару соседних элементов, у которых noteHeight равен
+    auto it = std::adjacent_find(melody.begin(), melody.end(), [](Sound a, Sound b) {
+        return a.noteHeight == b.noteHeight;
+    });
+
+    // Если такая пара найдена, выводим информацию о ней
+    if (it != melody.end()) {
+        cout << "Найдено два соседних звука с одинаковой высотой ноты: " <<
+                  it->noteHeight << " для " << it->duration << " и " <<
+                  (it + 1)->duration << endl;
+    } 
+    
+    // Если пара не найдена, выводим пустую строку
+    else {
+        cout << endl;
+    }
+
+    return 0; // завершаем программу
+}
