@@ -18,7 +18,7 @@ int main() {
     vector<Sound> melody = {{1, 2}, {2, 3}, {3, 1}, {3, 2}, {4, 4}, {5, 2}, {5, 3}};
 
     // Ищем первую пару соседних элементов, у которых noteHeight равен
-    auto it = std::adjacent_find(melody.begin(), melody.end(), [](Sound a, Sound b) {
+    auto it = adjacent_find(melody.begin(), melody.end(), [](Sound a, Sound b) {
         return a.noteHeight == b.noteHeight;
     });
 
