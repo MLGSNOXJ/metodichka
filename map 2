@@ -1,0 +1,105 @@
+#include <iostream>
+#include <map>
+#include <vector>
+
+using namespace std;
+
+class Library {
+private:
+    map<string, vector<string>> authors; // хранение списка авторов и их произведений
+
+public:
+    void addAuthor(string name) {
+        authors[name]; // добавление автора в список
+    }
+
+    void removeAuthor(string name) {
+        authors.erase(name); // удаление автора из списка
+    }
+
+    void addBook(string author, string book) {
+        authors[author].push_back(book); // добавление произведения заданного автора
+    }
+
+    void removeBook(string author, string book) {
+        vector<string>& books = authors[author]; // получение списка произведений заданного автора
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i] == book) {
+                books.erase(books.begin() + i); // удаление заданного произведения
+                break;
+            }
+        }
+    }
+
+    void editBook(string author, string oldBook, string newBook) {
+        vector<string>& books = authors[author]; // получение списка произведений заданного автора
+        for (int i = 0; i < books.size(); i++) {
+            if (books[i] == oldBook) {
+                books[i] = newBook; // изменение заданного произведения
+                break;
+            }
+        }
+    }
+
+    vector<string> getBooksByAuthor(string author) {
+        return authors[author]; // получение списка произведений заданного автора
+    }
+
+    void changeAuthorName(string oldName, string newName) {
+        vector<string> books = authors[oldName]; // получение списка произведений заданного автора
+        authors.erase(oldName); // удаление автора с его произведениями из списка
+        authors[newName] = books; // добавление автора с его произведениями в список с новым именем
+    }
+
+    vector<string> getBooksByYearRange(int startYear, int endYear) {
+        vector<string> result;
+        for (auto& author : authors) { // перебор всех авторов
+            for (auto& book : author.second) { // перебор всех произведений автора
+                // получение года из названия произведения (предполагается, что год указан в конце названия в круглых скобках)
+                int year = stoi(book.substr(book.find_last_of("(") + 1, 4));
+                if (year >= startYear && year <= endYear) {
+                    result.push_back(author.first + " - " + book); // добавление автора и произведения в список
+                }
+            }
+        }
+        return result;
+    }
+};
+
+int main() {
+    Library library;
+
+    // добавление авторов и произведений
+    library.addAuthor("Иванов");
+    library.addBook("Иванов", "Роман (1990)");
+    library.addBook("Иванов", "Стихи (1995)");
+
+    library.addAuthor("Петров");
+    library.addBook("Петров", "Рассказ (1985)");
+    library.addBook("Петров", "Драма (1992)");
+
+    // изменение псевдонима автора
+    library.changeAuthorName("Иванов", "Сидоров");
+
+    // получение списка произведений автора
+    vector<string> books = library.getBooksByAuthor("Сидоров");
+    cout << "Произведения Сидорова:\n";
+    for (auto& book : books) {
+        cout << book << "\n";
+    }
+
+    // удаление произведения автора
+    library.removeBook("Петров", "Драма (1992)");
+
+    // изменение произведения автора
+    library.editBook("Петров", "Рассказ (1985)", "Новый рассказ (1985)");
+
+    // получение списка произведений автора в заданном промежутке лет
+    vector<string> booksByYearRange = library.getBooksByYearRange(1990, 1995);
+    cout << "Произведения в заданном промежутке лет:\n";
+    for (auto& book : booksByYearRange) {
+        cout << book << "\n";
+    }
+
+    return 0;
+}
